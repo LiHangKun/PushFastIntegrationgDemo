@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.umeng.message.demo">
-
-    <!-- 以下为需要的基本权限，需要自行添加至您的AndroidManifest文件中 start-->
+    <!-- 以下为需要的基本权限，需要自行添加至您的AndroidManifest文件中 start -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -15,9 +14,6 @@
     <uses-permission android:name="android.permission.BROADCAST_PACKAGE_REPLACED" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <!-- 以下为需要的基本权限，需要自行添加至您的AndroidManifest文件中 end-->
-
-
 
     <application
         android:name=".MyApplication"
@@ -27,6 +23,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity2">
+
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,13 +33,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.umeng.message.demo.MipushTestActivity"
-            android:exported="true"/>
+            android:name=".MipushTestActivity"
+            android:exported="true"></activity> <!-- 以下为基本配置信息，需要自行添加至您的AndroidManifest文件中 start -->
 
-
-        <!-- 以下为基本配置信息，需要自行添加至您的AndroidManifest文件中 start-->
         <service
             android:name="com.taobao.accs.ChannelService"
             android:exported="true"
@@ -52,7 +48,6 @@
                 <action android:name="com.taobao.accs.intent.action.ELECTION" />
             </intent-filter>
         </service>
-
         <service
             android:name="com.taobao.accs.data.MsgDistributeService"
             android:exported="true">
@@ -72,13 +67,13 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
                 <data android:scheme="package" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name="com.taobao.accs.ServiceReceiver"
             android:process=":channel">
@@ -93,12 +88,10 @@
         <service
             android:name="com.taobao.accs.internal.AccsJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"
-            android:process=":channel"/>
-
+            android:process=":channel" />
         <service
             android:name="com.taobao.accs.ChannelService$KernelService"
             android:process=":channel" />
-
         <service
             android:name="org.android.agoo.accs.AgooService"
             android:exported="true">
@@ -106,7 +99,6 @@
                 <action android:name="com.taobao.accs.intent.action.RECEIVE" />
             </intent-filter>
         </service>
-
         <service
             android:name="com.umeng.message.UmengIntentService"
             android:exported="true"
@@ -115,7 +107,6 @@
                 <action android:name="org.agoo.android.intent.action.RECEIVE" />
             </intent-filter>
         </service>
-
         <service
             android:name="com.umeng.message.XiaomiIntentService"
             android:exported="true"
@@ -134,6 +125,7 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
@@ -153,8 +145,8 @@
 
         <service
             android:name="com.umeng.message.UmengMessageCallbackHandlerService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="false">
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE">
             <intent-filter>
                 <action android:name="com.umeng.messge.registercallback.action" />
             </intent-filter>
@@ -171,56 +163,46 @@
                 <action android:name="com.umeng.message.message.sendmessage.action" />
             </intent-filter>
         </service>
-
         <service
             android:name="com.umeng.message.UmengDownloadResourceService"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            android:exported="false" />
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <provider
             android:name="com.umeng.message.provider.MessageProvider"
             android:authorities="${applicationId}.umeng.message"
             android:exported="false">
             <grant-uri-permission android:pathPattern=".*" />
-        </provider>
-        <!-- 以下为基本配置信息，需要自行添加至您的AndroidManifest文件中 end-->
-
-
-
-        <!-- 魅族 start-->
-        <!--push应用定义消息receiver声明 -->
-        <receiver android:name="com.umeng.message.demo.MeizuTestReceiver">
+        </provider> <!-- 以下为基本配置信息，需要自行添加至您的AndroidManifest文件中 end -->
+        <!-- 魅族 start -->
+        <!-- push应用定义消息receiver声明 -->
+        <receiver android:name=".MeizuTestReceiver">
             <intent-filter>
+
                 <!-- 接收push消息 -->
                 <action android:name="com.meizu.flyme.push.intent.MESSAGE" />
                 <!-- 接收register消息 -->
                 <action android:name="com.meizu.flyme.push.intent.REGISTER.FEEDBACK" />
-                <!-- 接收unregister消息-->
+                <!-- 接收unregister消息 -->
                 <action android:name="com.meizu.flyme.push.intent.UNREGISTER.FEEDBACK" />
                 <!-- 兼容低版本Flyme3推送服务配置 -->
                 <action android:name="com.meizu.c2dm.intent.REGISTRATION" />
                 <action android:name="com.meizu.c2dm.intent.RECEIVE" />
 
-                <category android:name="${applicationId}"/>
+                <category android:name="${applicationId}" />
             </intent-filter>
-        </receiver>
-        <!-- 魅族 end-->
-
-        <!-- VIVO厂商通道 start-->
+        </receiver> <!-- 魅族 end -->
+        <!-- VIVO厂商通道 start -->
         <meta-data
             android:name="com.vivo.push.api_key"
             android:value="此处改为VIVO后台真实参数" />
         <meta-data
             android:name="com.vivo.push.app_id"
-            android:value="此处改为VIVO后台真实参数" />
-        <!-- VIVO厂商通道 end-->
-
-        <!-- HUAWEI厂商通道 start-->
+            android:value="此处改为VIVO后台真实参数" /> <!-- VIVO厂商通道 end -->
+        <!-- HUAWEI厂商通道 start -->
         <meta-data
             android:name="com.huawei.hms.client.appid"
             android:value="appid=此处改为VIVO后台真实参数" />
-        <!-- HUAWEI厂商通道 end-->
-
     </application>
 
 </manifest>

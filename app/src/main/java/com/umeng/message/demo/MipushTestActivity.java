@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.umeng.commonsdk.UMConfigure;
 import com.umeng.message.UmengNotifyClickActivity;
 
 import org.android.agoo.common.AgooConstants;
@@ -19,6 +20,8 @@ public class MipushTestActivity extends UmengNotifyClickActivity {
         super.onCreate(bundle);
         setContentView(R.layout.activity_mipush);
         mipushTextView = (TextView) findViewById(R.id.mipushTextView);
+        Log.i("aaa","进来了");
+
     }
 
     @Override
@@ -26,6 +29,7 @@ public class MipushTestActivity extends UmengNotifyClickActivity {
         super.onMessage(intent);
         final String body = intent.getStringExtra(AgooConstants.MESSAGE_BODY);
         Log.i(TAG, body);
+        Log.i("aaa",""+body);
         if (!TextUtils.isEmpty(body)) {
             runOnUiThread(new Runnable() {
                 @Override
